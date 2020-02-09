@@ -2,7 +2,7 @@ name: Simplespit
 version: ${project.version}
 main: lv.voop.simplespit.core
 api-version: 1.13
-authors: [VoopLV]
+authors: [VoopLV, Commissar_Voop]
 website: voop.lv
 commands:
   spit:
