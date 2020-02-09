@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
@@ -114,8 +115,8 @@ public final class core extends JavaPlugin {
                         return true;
                     }
                 } else if (args[0].equalsIgnoreCase("about")) {
-                    p.sendMessage(ChatColor.GRAY + text_italic + "SimpleSpit By " + ChatColor.YELLOW + plugin.getDescription().getAuthors());
-                    p.sendMessage(ChatColor.BLUE + "Version: " + ChatColor.YELLOW + plugin.getDescription().getVersion());
+                    p.sendMessage(ChatColor.GRAY + text_italic + "SimpleSpit By " + ChatColor.YELLOW + text_italic + "Commissar_Voop");
+                    p.sendMessage(ChatColor.BLUE + "Version: " + ChatColor.YELLOW + "1.0");
                     return true;
                 }
             }
@@ -126,6 +127,10 @@ public final class core extends JavaPlugin {
                     return true;
                 } else if (args[0].equalsIgnoreCase("reload")) {
                     ConfigCheck();
+                    return true;
+                } else if (args[0].equalsIgnoreCase("about")) {
+                    sender.sendMessage(ChatColor.GRAY + text_italic + "SimpleSpit By " + ChatColor.YELLOW + text_italic + "Commissar_Voop");
+                    sender.sendMessage(ChatColor.BLUE + "Version: " + ChatColor.YELLOW + "1.0");
                     return true;
                 }
             }
