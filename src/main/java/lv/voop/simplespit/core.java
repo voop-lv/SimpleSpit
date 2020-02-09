@@ -113,6 +113,10 @@ public final class core extends JavaPlugin {
                         sender.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "You Don't Have Permission To Run This Command!");
                         return true;
                     }
+                } else if (args[0].equalsIgnoreCase("about")) {
+                    p.sendMessage(ChatColor.GRAY + text_italic + "SimpleSpit By " + ChatColor.YELLOW + plugin.getDescription().getAuthors());
+                    p.sendMessage(ChatColor.BLUE + "Version: " + ChatColor.YELLOW + plugin.getDescription().getVersion());
+                    return true;
                 }
             }
         } else {
