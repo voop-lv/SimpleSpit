@@ -4,5 +4,5 @@ Part Of The Essn Engine. Spit like a llama as a player. As a note this is my fir
 * simplespit.use
 * simplespit.reload
 # YAML Configuration - Default Settings!
-disable-for_specmode: true
-simplespit: true
+* disable-for_specmode: true
+* simplespit: true
