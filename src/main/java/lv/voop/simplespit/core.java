@@ -107,7 +107,6 @@ public final class core extends JavaPlugin {
                     }
                 } else if (args[0].equalsIgnoreCase("reload")) {
                     if (p.hasPermission("simplespit.reload")) {
-                        //Config Reload Logic
                         ConfigReload(p);
                         return true;
                     } else {
@@ -122,7 +121,6 @@ public final class core extends JavaPlugin {
                     sender.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "Only Players Can Run This Command");
                     return true;
                 } else if (args[0].equalsIgnoreCase("reload")) {
-                    //Config Reload Logic
                     ConfigCheck();
                     return true;
                 }
