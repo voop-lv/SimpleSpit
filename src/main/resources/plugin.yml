@@ -3,6 +3,7 @@ version: ${project.version}
 main: lv.voop.simplespit.core
 api-version: 1.13
 authors: [VoopLV]
+website: voop.lv
 commands:
   spit:
     description: Spit Like A Llama As A Player
