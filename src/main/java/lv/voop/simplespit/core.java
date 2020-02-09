@@ -123,6 +123,7 @@ public final class core extends JavaPlugin {
                     return true;
                 } else if (args[0].equalsIgnoreCase("reload")) {
                     //Config Reload Logic
+                    ConfigCheck();
                     return true;
                 }
             }
