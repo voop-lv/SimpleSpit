@@ -1,5 +1,9 @@
 package lv.voop.simplespit;
 
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -100,8 +104,13 @@ public final class core extends JavaPlugin {
                                 if (cooldowns.containsKey(p.getName())) {
                                     long secondsLeft = ((cooldowns.get(p.getName())/1000)+cooldownTime) - (System.currentTimeMillis()/1000);
                                     if(secondsLeft>0) {
-                                        p.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "You Have To Wait " + ChatColor.YELLOW + secondsLeft + ChatColor.RED + " Second('s) before running this command!");
-                                        return true;
+                                        if (secondsLeft <= 1) {
+                                            p.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "You Have To Wait " + ChatColor.YELLOW + secondsLeft + ChatColor.RED + " Second before running this command!");
+                                            return true;
+                                        } else if (secondsLeft >= 1) {
+                                            p.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "You Have To Wait " + ChatColor.YELLOW + secondsLeft + ChatColor.RED + " Seconds before running this command!");
+                                            return true;
+                                        }
                                     }
                                 }
                                 cooldowns.put(sender.getName(), System.currentTimeMillis());
@@ -113,8 +122,13 @@ public final class core extends JavaPlugin {
                             if (cooldowns.containsKey(p.getName())) {
                                 long secondsLeft = ((cooldowns.get(p.getName())/1000)+cooldownTime) - (System.currentTimeMillis()/1000);
                                 if(secondsLeft>0) {
-                                    p.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "You Have To Wait " + ChatColor.YELLOW + secondsLeft + ChatColor.RED + " Second('s) before running this command!");
-                                    return true;
+                                    if (secondsLeft <= 1) {
+                                        p.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "You Have To Wait " + ChatColor.YELLOW + secondsLeft + ChatColor.RED + " Second before running this command!");
+                                        return true;
+                                    } else if (secondsLeft >= 1) {
+                                        p.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "You Have To Wait " + ChatColor.YELLOW + secondsLeft + ChatColor.RED + " Seconds before running this command!");
+                                        return true;
+                                    }
                                 }
                             }
                             cooldowns.put(p.getName(), System.currentTimeMillis());
@@ -134,8 +148,11 @@ public final class core extends JavaPlugin {
                         return true;
                     }
                 } else if (args[0].equalsIgnoreCase("about")) {
+                    TextComponent github = new TextComponent( ChatColor.RED + "[" + ChatColor.YELLOW + "GitHub" + ChatColor.RED + "]" );
+                    github.setClickEvent( new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/voop-lv/SimpleSpit"));
                     p.sendMessage(ChatColor.GRAY + text_italic + "SimpleSpit By " + ChatColor.YELLOW + text_italic + "Commissar_Voop");
                     p.sendMessage(ChatColor.BLUE + "Version: " + ChatColor.YELLOW + "1.0");
+                    p.spigot().sendMessage(github);
                     return true;
                 }
             }
