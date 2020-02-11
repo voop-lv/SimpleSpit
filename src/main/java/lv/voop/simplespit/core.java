@@ -1,5 +1,6 @@
 package lv.voop.simplespit;
 
+import lv.voop.simplespit.mcstats.Metrics;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -31,6 +32,8 @@ public final class core extends JavaPlugin {
     public String text_italic = ChatColor.ITALIC + "";
     @Override
     public void onEnable() {
+        int pluginId = 6477;
+        Metrics metrics = new Metrics(this, pluginId);
         configFile = new File(getDataFolder(), "config.yml");
         try {
             ConfigCheck();
