@@ -1,3 +1,4 @@
 #SimpleSpit Configuration
 disable-for_specmode: true
 simplespit: true
+cooldown: 5
