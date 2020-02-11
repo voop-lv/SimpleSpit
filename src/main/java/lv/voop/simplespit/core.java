@@ -3,14 +3,12 @@ package lv.voop.simplespit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
@@ -18,11 +16,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 
 public final class core extends JavaPlugin {
     File configFile;
     FileConfiguration config;
     int test = 1;
+    public HashMap<String, Long> cooldowns = new HashMap<String, Long>();
     public static Plugin plugin;
     public String text_italic = ChatColor.ITALIC + "";
     @Override
@@ -96,10 +96,29 @@ public final class core extends JavaPlugin {
                                 return true;
                             } else {
                                 //Logic
+                                int cooldownTime = getConfig().getInt("cooldown");
+                                if (cooldowns.containsKey(p.getName())) {
+                                    long secondsLeft = ((cooldowns.get(p.getName())/1000)+cooldownTime) - (System.currentTimeMillis()/1000);
+                                    if(secondsLeft>0) {
+                                        p.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "You Have To Wait " + ChatColor.YELLOW + secondsLeft + ChatColor.RED + " Second('s) before running this command!");
+                                        return true;
+                                    }
+                                }
+                                cooldowns.put(sender.getName(), System.currentTimeMillis());
                                 ShootSpit(p);
                                 return true;
                             }
                         } else {
+                            int cooldownTime = getConfig().getInt("cooldown");
+                            if (cooldowns.containsKey(p.getName())) {
+                                long secondsLeft = ((cooldowns.get(p.getName())/1000)+cooldownTime) - (System.currentTimeMillis()/1000);
+                                if(secondsLeft>0) {
+                                    p.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "You Have To Wait " + ChatColor.YELLOW + secondsLeft + ChatColor.RED + " Second('s) before running this command!");
+                                    return true;
+                                }
+                            }
+                            cooldowns.put(p.getName(), System.currentTimeMillis());
+                            ShootSpit(p);
                             return true;
                         }
                     } else {
