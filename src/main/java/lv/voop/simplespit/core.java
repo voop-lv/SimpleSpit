@@ -21,7 +21,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public final class core extends JavaPlugin {
     File configFile;
@@ -154,7 +156,7 @@ public final class core extends JavaPlugin {
                     TextComponent github = new TextComponent( ChatColor.RED + "[" + ChatColor.YELLOW + "GitHub" + ChatColor.RED + "]" );
                     github.setClickEvent( new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/voop-lv/SimpleSpit"));
                     p.sendMessage(ChatColor.GRAY + text_italic + "SimpleSpit By " + ChatColor.YELLOW + text_italic + "Commissar_Voop");
-                    p.sendMessage(ChatColor.BLUE + "Version: " + ChatColor.YELLOW + "1.0");
+                    p.sendMessage(ChatColor.BLUE + "Version: " + ChatColor.YELLOW + "1.5");
                     p.spigot().sendMessage(github);
                     return true;
                 }
@@ -176,5 +178,39 @@ public final class core extends JavaPlugin {
             return true;
         }
         return false;
+    }
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
+        if (cmd.getName().equalsIgnoreCase("spit")) {
+            List<String> type = new ArrayList<String>();
+            if (args.length == 1) {
+                if (args[0].equalsIgnoreCase("")){
+                    type.add("about");
+                    if (sender.hasPermission("simplespit.reload")) {
+                        type.add("reload");
+                    }
+                    return type;
+                } else if ((args[0].equalsIgnoreCase("a")) || (args[0].equalsIgnoreCase("ab")) || (args[0].equalsIgnoreCase("abo")) || (args[0].equalsIgnoreCase("abou")) || (args[0].equalsIgnoreCase("about"))) {
+                    type.add("about");
+                    return type;
+                } else if ((args[0].equalsIgnoreCase("r")) || (args[0].equalsIgnoreCase("re")) || (args[0].equalsIgnoreCase("rel")) || (args[0].equalsIgnoreCase("relo")) || (args[0].equalsIgnoreCase("reloa")) || (args[0].equalsIgnoreCase("reload"))) {
+                    if (sender.hasPermission("simplespit.reload")) {
+                        type.add("reload");
+                        return type;
+                    }
+                } else {
+                    type.add("about");
+                    if (sender.hasPermission("simplespit.reload")) {
+                        type.add("reload");
+                    }
+                    return type;
+                }
+            }
+            if (args.length >= 2) {
+                type.add("");
+                return type;
+            }
+        }
+        return null;
     }
 }
